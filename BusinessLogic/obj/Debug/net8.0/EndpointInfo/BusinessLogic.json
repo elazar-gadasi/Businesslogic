@@ -1,0 +1,170 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BusinessLogic",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Calculations/CalculetinResult": {
+      "post": {
+        "tags": [
+          "Calculations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculetinsDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculetinsDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculetinsDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculationResultDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculationResultDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculationResultDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Calculations/GetOperations": {
+      "get": {
+        "tags": [
+          "Calculations"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Calculation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "value1Calculation": {
+            "type": "string",
+            "nullable": true
+          },
+          "value2Calculation": {
+            "type": "string",
+            "nullable": true
+          },
+          "typeCalculation": {
+            "type": "string",
+            "nullable": true
+          },
+          "resCalculation": {
+            "type": "string",
+            "nullable": true
+          },
+          "creatDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CalculationResultDTO": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string",
+            "nullable": true
+          },
+          "last3SameType": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Calculation"
+            },
+            "nullable": true
+          },
+          "sameTypeCountThisMonth": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CalculetinsDTO": {
+        "type": "object",
+        "properties": {
+          "value1Calculation": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "value2Calculation": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "typeCalculation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
